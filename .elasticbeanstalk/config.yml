@@ -1,13 +1,9 @@
 branch-defaults:
   default:
-    environment: wordbook-youtube-api-dev
+    environment: flask-youtube-api-app-dev
     group_suffix: null
-environment-defaults:
-  wordbook-youtube-api-dev:
-    branch: default
-    repository: Flask_youtube_transcript
 global:
-  application_name: wordbook_youtube_api
+  application_name: flask_youtube_api_app
   branch: null
   default_ec2_keyname: aws-eb
   default_platform: Python 3.8 running on 64bit Amazon Linux 2
