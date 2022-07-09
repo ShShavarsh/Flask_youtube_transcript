@@ -1,6 +1,6 @@
 branch-defaults:
   default:
-    environment: null
+    environment: wordbook-youtube-api-dev
     group_suffix: null
 global:
   application_name: wordbook_youtube_api

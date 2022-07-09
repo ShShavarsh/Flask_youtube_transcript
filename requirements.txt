@@ -30,8 +30,6 @@ Pillow==9.1.0
 pipwin==0.5.2
 pipx==1.1.0
 platformdirs==2.5.2
-PyAudio @ file:///C:/Users/Shavarsh/pipwin/PyAudio-0.2.11-cp310-cp310-win_amd64.whl
-PyAutoGUI==0.9.53
 pydantic==1.9.1
 PyGetWindow==0.0.9
 pyjsparser==2.7.1
