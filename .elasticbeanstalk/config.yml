@@ -2,6 +2,10 @@ branch-defaults:
   default:
     environment: wordbook-youtube-api-dev
     group_suffix: null
+environment-defaults:
+  wordbook-youtube-api-dev:
+    branch: default
+    repository: Flask_youtube_transcript
 global:
   application_name: wordbook_youtube_api
   branch: null

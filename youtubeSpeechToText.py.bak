@@ -3,7 +3,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/, methods=['GET'])
 def hello():
     return "hello"
 
