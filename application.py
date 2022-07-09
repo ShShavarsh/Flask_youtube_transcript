@@ -3,11 +3,11 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from flask import Flask
 application = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def hello():
     return "hello"
 
-@app.route('/getYoutubeVideoTextByID/<string:ID>', methods=['GET'])
+@application.route('/getYoutubeVideoTextByID/<string:ID>', methods=['GET'])
 def welcome(ID):
     listOfTexts= YouTubeTranscriptApi.get_transcript(ID)
     return ''.join(str(e) for e in listOfTexts)
