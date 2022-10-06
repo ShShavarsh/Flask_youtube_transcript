@@ -1,5 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import JSONFormatter
+from flask import request
 
 from flask import Flask
 application = Flask(__name__)
@@ -15,6 +16,19 @@ def multilingualTranscriptApi(video_id):
     formatter = JSONFormatter()
     json_formatted = formatter.format_transcript(transcript.fetch())
     return json_formatted
+
+
+@application.route('/translate-video', methods=['GET'])
+def translationApi():
+    video_id = request.args.get("vid")
+    target_lang = request.args.get("tl")
+    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+    transcript  = transcript_list.find_transcript(['en', 'es', 'fr','de','pt','vi','hy','cs','th','sw','sv','fil','fi','fa','ru'])
+    translated_transcript = transcript.translate(target_lang)
+    formatter = JSONFormatter()
+    json_formatted = formatter.format_transcript(translated_transcript.fetch())
+    return json_formatted
+
 
 @application.route('/getYoutubeVideoTextByID/<string:ID>', methods=['GET'])
 def welcome(ID):
