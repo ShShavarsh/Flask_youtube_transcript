@@ -12,7 +12,7 @@ def hello():
 @application.route('/multilingual-transcripts/<string:video_id>', methods=['GET'])
 def multilingualTranscriptApi(video_id):
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-    transcript  = transcript_list.find_transcript(['en', 'es', 'fr','de','pt','vi','hy','cs','th','sw','sv','fil','fi','fa','ru'])
+    transcript  = transcript_list.find_transcript(['en', 'es', 'fr','de','pt','vi','hy','cs','th','sw','sv','fil','fi','fa','ru', 'ja'])
     formatter = JSONFormatter()
     json_formatted = formatter.format_transcript(transcript.fetch())
     return json_formatted
