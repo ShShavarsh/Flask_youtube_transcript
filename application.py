@@ -16,7 +16,7 @@ def hello():
 def multilingual_transcript_api(video_id):
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
     transcript = transcript_list.find_transcript(
-        ['en', 'es', 'fr', 'de', 'pt', 'vi', 'hy', 'cs', 'th', 'sw', 'sv', 'fil', 'fi', 'fa', 'ru'])
+        ['en', 'es', 'fr', 'de', 'pt', 'vi', 'hy', 'cs', 'th', 'sw', 'sv', 'fil', 'fi', 'fa', 'ru', "ja"])
 
     return jsonify(
         video_id=transcript.video_id,
