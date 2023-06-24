@@ -35,4 +35,6 @@ def welcome(ID):
     listOfTexts= YouTubeTranscriptApi.get_transcript(ID)
     formatter = JSONFormatter()
     json_formatted = formatter.format_transcript(listOfTexts)
-    return json_formatted    
+    return json_formatted  
+if __name__ == '__main__':
+    application.run(port=8000)    
