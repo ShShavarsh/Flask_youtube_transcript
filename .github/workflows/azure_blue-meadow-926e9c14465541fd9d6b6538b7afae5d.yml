@@ -61,3 +61,10 @@ jobs:
           app-name: 'blue-meadow-926e9c14465541fd9d6b6538b7afae5d'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AAB7FA3AE1A84811A441B9CADC840E1F }}
+          slot-settings: >-
+            [
+              {
+                "name": "WEBSITES_PORT",
+                "value": "5000"
+              }
+            ]
