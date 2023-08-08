@@ -61,3 +61,10 @@ jobs:
           app-name: 'transcript-api-wordbook'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_49ED0B30A05D49A49459A6AA6EBAC61B }}
+          slot-settings: >-
+            [
+              {
+                "name": "WEBSITES_PORT",
+                "value": "5000"
+              }
+            ]
