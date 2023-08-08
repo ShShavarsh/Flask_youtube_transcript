@@ -37,4 +37,4 @@ def welcome(ID):
     json_formatted = formatter.format_transcript(listOfTexts)
     return json_formatted  
 if __name__ == '__main__':
-    application.run(port=8000)    
+    application.run(port=5000)    
