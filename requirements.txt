@@ -1,7 +1,5 @@
-
-awsebcli==3.20.3
-
-Flask==2.1.1
-pipx==1.1.0
-python-dateutil==2.8.2
-youtube-transcript-api==0.4.4
+awsebcli
+Flask
+pipx
+python-dateutil
+youtube-transcript-api
