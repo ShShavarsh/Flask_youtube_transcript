@@ -1,5 +1,3 @@
-awsebcli
-Flask
-pipx
-python-dateutil
 youtube-transcript-api
+Flask
+python-dotenv

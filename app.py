@@ -1,40 +1,48 @@
-from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api import TranslationLanguageNotAvailable
 from youtube_transcript_api.formatters import JSONFormatter
-from flask import request
+from youtube_transcript_api.formatters import TextFormatter
+
+
+from utils.transcripts import get_transcript_list, DEFAULT_LANGS
+from flask import jsonify, request
 
 from flask import Flask
 application = Flask(__name__)
 
+
 @application.route('/', methods=['GET'])
 def hello():
-    return "wordbook"
+    return "init-youtube-transcript-api"
     
 @application.route('/multilingual-transcripts/<string:video_id>', methods=['GET'])
 def multilingualTranscriptApi(video_id):
-    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-    transcript  = transcript_list.find_transcript(['en', 'es', 'fr','de','pt','vi','hy','cs','th','sw','sv','fil','fi','fa','ru', 'ja'])
-    formatter = JSONFormatter()
-    json_formatted = formatter.format_transcript(transcript.fetch())
-    return json_formatted
+    transcript_list = get_transcript_list(video_id)
+    transcript  = transcript_list.find_transcript(DEFAULT_LANGS) 
+    return  JSONFormatter().format_transcript(transcript.fetch())
 
 
-@application.route('/translate-video', methods=['GET'])
+@application.route('/translation', methods=['GET'])
 def translationApi():
-    video_id = request.args.get("vid")
-    target_lang = request.args.get("tl")
-    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-    transcript  = transcript_list.find_transcript(['en', 'es', 'fr','de','pt','vi','hy','cs','th','sw','sv','fil','fi','fa','ru'])
-    translated_transcript = transcript.translate(target_lang)
-    formatter = JSONFormatter()
-    json_formatted = formatter.format_transcript(translated_transcript.fetch())
+    vid = request.args.get('vid')
+    tl = request.args.get('tl')
+    transcript_list = get_transcript_list(vid)
+    transcript  = transcript_list.find_transcript(['en'])
+
+    try:
+        translated_transcript = transcript.translate(tl)
+        json_formatted = JSONFormatter().format_transcript(translated_transcript.fetch())
+        return json_formatted
+    except TranslationLanguageNotAvailable:
+        return jsonify({"error": "translation language not available", "language": tl}), 404
+
+
+@application.route('/youtube-video-text/<string:video_id>', methods=['GET'])
+def welcome(video_id):
+    transcript_list = get_transcript_list(video_id)
+    found_transcript = transcript_list.find_transcript(DEFAULT_LANGS)
+    json_formatted = TextFormatter().format_transcript(found_transcript.fetch())
     return json_formatted
 
-
-@application.route('/getYoutubeVideoTextByID/<string:ID>', methods=['GET'])
-def welcome(ID):
-    listOfTexts= YouTubeTranscriptApi.get_transcript(ID)
-    formatter = JSONFormatter()
-    json_formatted = formatter.format_transcript(listOfTexts)
-    return json_formatted    
 if __name__ == '__main__':
+    application.config.from_pyfile('settings.py')
     application.run(host='0.0.0.0', port=5050)
